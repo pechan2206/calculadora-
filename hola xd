@@ -9,7 +9,7 @@ ventana.title("Calculadora :)")
 ventana.config(bg=color)
 
 expresion = " "
-entrada = None
+
 
 letra = 20
 c = "#fc4b08"
