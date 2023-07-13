@@ -1,0 +1,73 @@
+import tkinter as tk
+from tkinter import ttk, messagebox
+
+color = "#000000"
+ventana = tk.Tk()
+ventana.geometry("350x375")
+ventana.resizable(0,0)
+ventana.title("Calculadora :)")
+ventana.config(bg=color)
+
+expresion = " "
+entrada = None
+
+letra = 20
+c = "#fc4b08"
+
+var1 = tk.StringVar()
+entrada_frame = tk.Frame(ventana,width=400,height=100,bg=color,border=0)
+entrada_frame.pack(side=tk.TOP)
+entrada = tk.Entry(entrada_frame, font=("arial",17),textvariable=var1,width=26,justify="right",background=color,foreground="white",border=0)
+entrada.grid(row=0,column=0,ipady=15)
+
+botones_frame = tk.Frame(ventana,width=350,height=375,background=color)
+botones_frame.pack()
+
+def clear():
+    global expresion
+    expresion=("")
+    var1.set("0")
+tk.Button(botones_frame,text="C",width=32,height=3,bd=0,background=color,command=clear,fg=c).grid(row=0,column=0,columnspan=3,padx=1,pady=1,sticky="NSWE")
+
+def btnClik(num):
+    global expresion
+    expresion=expresion+str(num)
+    var1.set(expresion)
+    
+tk.Button(botones_frame ,text="/",width=7,height=3,border=0,background=color,command=lambda:btnClik("/"), fg = c).grid(row=0,column=3,padx=1,pady=1,sticky="NSWE")
+
+tk.Button(botones_frame,text="7",width=7,height=3,border=0,background=color,command=lambda:btnClik(7),font =(letra), fg = c).grid(row=1,column=0,padx=1,pady=1)
+tk.Button(botones_frame,text="8",width=7,height=3,border=0,background=color,command=lambda:btnClik(8),font =(letra), fg = c).grid(row=1,column=1,padx=1,pady=1)
+tk.Button(botones_frame,text="9",width=7,height=3,border=0,background=color,command=lambda:btnClik(9),font =(letra), fg = c).grid(row=1,column=2,padx=1,pady=1)
+tk.Button(botones_frame,text="*",width=7,height=3,border=0,background=color,command=lambda:btnClik("*"),font =(letra), fg = c).grid(row=1,column=3,padx=1,pady=1)
+
+
+tk.Button(botones_frame,text="4",width=7,height=3,border=0,background=color,command=lambda:btnClik(4),font=(letra), fg = c).grid(row=2,column=0,padx=1,pady=1)
+tk.Button(botones_frame,text="5",width=7,height=3,border=0,background=color,command=lambda:btnClik(5),font =(letra), fg = c).grid(row=2,column=1,padx=1,pady=1)
+tk.Button(botones_frame,text="6",width=7,height=3,border=0,background=color,command=lambda:btnClik(6),font =(letra), fg = c).grid(row=2,column=2,padx=1,pady=1)
+tk.Button(botones_frame,text="-",width=7,height=3,border=0,background=color,command=lambda:btnClik("-"),font =(letra), fg = c).grid(row=2,column=3,padx=1,pady=1)
+
+
+tk.Button(botones_frame,text="1",width=7,height=3,border=0,background=color,command=lambda:btnClik(1),font =(letra), fg = c).grid(row=3,column=0,padx=1,pady=1)
+tk.Button(botones_frame,text="2",width=7,height=3,border=0,background=color,command=lambda:btnClik(2),font =(letra), fg = c).grid(row=3,column=1,padx=1,pady=1)
+tk.Button(botones_frame,text="3",width=7,height=3,border=0,background=color,command=lambda:btnClik(3),font =(letra), fg = c).grid(row=3,column=2,padx=1,pady=1)
+tk.Button(botones_frame,text="+",width=7,height=3,border=0,background=color,command=lambda:btnClik("+"),font =(letra),fg=c).grid(row=3,column=3,padx=1,pady=1)
+
+def resultado():
+    global expresion
+    try:
+        opera=str(eval(expresion))
+        var1.set(opera)
+    except:
+        var1.set("ERROR")
+    expresion = "0"
+    
+
+tk.Button(botones_frame,text="0",width=16,height=3,border=0,background=color,command=lambda:btnClik(0),font =(letra),fg=c).grid(row=4,column=0,columnspan=2,padx=1,pady=1,sticky="NSWE")
+tk.Button(botones_frame,text=".",width=7,height=3,border=0,background=color,command=lambda:btnClik("."),font =(letra),fg=c).grid(row=4,column=2,padx=1,pady=1)
+tk.Button(botones_frame,text="=",width=7,height=3,border=0,background=color,command=resultado,font =(letra),fg=c).grid(row=4,column=3,padx=1,pady=1)
+
+
+
+
+ventana.mainloop()
